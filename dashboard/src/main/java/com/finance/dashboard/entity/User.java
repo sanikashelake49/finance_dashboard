@@ -1,18 +1,18 @@
 package com.finance.dashboard.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import jakarta.validation.constraints.*;
 
-@Entity 
+@Entity
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
 
-    @Column(unique = true)
+    @Email
     private String email;
 
     private String password;
@@ -69,6 +69,8 @@ public class User {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+    // getters & setters
     
     
 }

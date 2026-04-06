@@ -2,22 +2,19 @@ package com.finance.dashboard.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.*;
-
 import java.time.LocalDate;
 
-@Entity 
+@Entity
 public class FinancialRecord {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Positive
     private Double amount;
 
     @Enumerated(EnumType.STRING)
-    private RecordType type;
+    private Type type;
 
     @NotBlank
     private String category;
@@ -25,6 +22,9 @@ public class FinancialRecord {
     private LocalDate date;
 
     private String description;
+
+    @ManyToOne
+    private User user;
 
 	public Long getId() {
 		return id;
@@ -42,11 +42,11 @@ public class FinancialRecord {
 		this.amount = amount;
 	}
 
-	public RecordType getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(RecordType type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 
@@ -73,6 +73,15 @@ public class FinancialRecord {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-    
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+    // getters & setters
     
 }
